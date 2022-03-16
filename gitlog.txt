@@ -1,0 +1,81 @@
+commit 763ee0bcca1d1ee4e7a412a3abe39425c572d21e
+Author: Oskari Heinonen <oskari.l.heinonen@helsinki.fi>
+Date:   Wed Mar 16 14:01:43 2022 +0200
+
+    muokkauksia
+
+ tiedostoja/file2             | 0
+ tiedostoja/{file1 => file22} | 0
+ 2 files changed, 0 insertions(+), 0 deletions(-)
+
+commit 5c3b0dd8fc2bd236a29e62e5aa6ebac5c2b6d101
+Author: Oskari Heinonen <oskari.l.heinonen@helsinki.fi>
+Date:   Wed Mar 16 13:58:55 2022 +0200
+
+    tiedostoj luotu
+
+ tiedostoja/file1 | 0
+ tiedostoja/file2 | 0
+ tiedostoja/file3 | 0
+ 3 files changed, 0 insertions(+), 0 deletions(-)
+
+commit 20639f0534b8fc100c03321831e6abcceed865fe
+Author: Oskari Heinonen <oskari.l.heinonen@helsinki.fi>
+Date:   Wed Mar 16 13:54:42 2022 +0200
+
+    mutoksia
+
+ eka.txt    | 5 +++--
+ kolmas.txt | 2 +-
+ 2 files changed, 4 insertions(+), 3 deletions(-)
+
+commit 50904fd1db5a5bb8107fc7940bfe61d984fc42de
+Author: Oskari Heinonen <oskari.l.heinonen@helsinki.fi>
+Date:   Wed Mar 16 13:52:41 2022 +0200
+
+    nimi muutettu
+
+ tiedosto.txt => eka.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+commit c9b863462b66194108f2bbea42ce43d172e113fc
+Author: Oskari Heinonen <oskari.l.heinonen@helsinki.fi>
+Date:   Wed Mar 16 13:50:45 2022 +0200
+
+    toinen poistettu
+
+ toinen.txt | 1 -
+ 1 file changed, 1 deletion(-)
+
+commit a8f25b0aad33cf33735bb740a7053979197fad08
+Author: Oskari Heinonen <oskari.l.heinonen@helsinki.fi>
+Date:   Wed Mar 16 13:47:55 2022 +0200
+
+    muokattu
+
+ tiedosto.txt | 2 ++
+ 1 file changed, 2 insertions(+)
+
+commit bef7560bbea152ac12ebe8170720c0a0329a7f9d
+Author: Oskari Heinonen <oskari.l.heinonen@helsinki.fi>
+Date:   Wed Mar 16 13:46:54 2022 +0200
+
+    muokattu tiedosto.txt
+
+ tiedosto.txt | 100 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-
+ 1 file changed, 99 insertions(+), 1 deletion(-)
+
+commit 359bfb7f381e60774d562088e2c2f1f69c4864ae
+Author: Oskari Heinonen <oskari.l.heinonen@helsinki.fi>
+Date:   Wed Mar 16 13:42:11 2022 +0200
+
+    stuff luotu
+
+ stuff/notes.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+commit 8371d63147e83f65027568e5ffffaac115331574
+Author: Oskari Heinonen <oskari.l.heinonen@helsinki.fi>
+Date:   Wed Mar 16 13:39:59 2022 +0200
+
+    muokattu toinen ja kolmas
