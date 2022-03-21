@@ -8,7 +8,7 @@ Tämä repositorio on *Helsingin yliopiston* **Ohjelmistotekniikka** kurssia var
 ### Viikko 2
 [Tehtävät 1-8](https://github.com/oheinonen/ot-harjoitustyo/tree/master/laskarit/viikko2)
 
-[Tehtävä 9: 100& testikattavuus](https://github.com/oheinonen/ot-harjoitustyo/blob/master/laskarit/viikko2/Screenshot%20from%202022-03-21%2014-49-18.png)
+[Tehtävä 9: 100% testikattavuus](https://github.com/oheinonen/ot-harjoitustyo/blob/master/laskarit/viikko2/Screenshot%20from%202022-03-21%2014-49-18.png)
 
 ## Dokumentaatio 
 - [Työaikakirjanpito](https://github.com/oheinonen/ot-harjoitustyo/blob/master/dokumentaatio/tyoaikakirjanpito.md)
