@@ -1,3 +1,5 @@
+```mermaid
+
 classDiagram
     Monopoli -- "2..8" Pelaaja
     Monopoli -- "2" Noppa
@@ -29,3 +31,4 @@ classDiagram
     Ruutu <|-- Laitos
     Aloitusruutu <|-- Monopoli
     Vankila <|-- Monopoli
+```
