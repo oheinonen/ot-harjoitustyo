@@ -1,15 +1,44 @@
 # Budgeting application 
-Tämä repositorio on *Helsingin yliopiston* **Ohjelmistotekniikka** kurssia varten. Alla olevista linkeistä pääsee katsomaan viikottaiset tehtävät.
-## Tehtävät
-### Viikko 1
-[gitlog.txt](https://github.com/oheinonen/ot-harjoitustyo/blob/master/laskarit/viikko1/gitlog.txt)
+This repository contains budgeting application made for Univerity of Helsinki course (Ohjelmistotekniikka)[https://courses.helsinki.fi/fi/tkt20002]
+Purpose of this application is that the users can keep track on their expenses and income. The application can have multiple users, each having their own expenses and income.
 
-[komentorivi.txt](https://github.com/oheinonen/ot-harjoitustyo/blob/master/laskarit/viikko1/komentorivi.txt)
-### Viikko 2
-[Tehtävät 1-8](https://github.com/oheinonen/ot-harjoitustyo/tree/master/laskarit/viikko2)
 
-[Tehtävä 9: 100% testikattavuus](https://github.com/oheinonen/ot-harjoitustyo/blob/master/laskarit/viikko2/Screenshot%20from%202022-03-21%2014-49-18.png)
+## Documentation 
+- [Working time records](https://github.com/oheinonen/ot-harjoitustyo/blob/master/documentation/working_time_records.md)
+- [Requirements specification](https://github.com/oheinonen/ot-harjoitustyo/blob/master/documentation/requirement_specification.md)
+- [Changelog](https://github.com/oheinonen/ot-harjoitustyo/blob/master/documentation/changelog.md)
 
-## Dokumentaatio 
-- [Työaikakirjanpito](https://github.com/oheinonen/ot-harjoitustyo/blob/master/dokumentaatio/tyoaikakirjanpito.md)
-- [Vaatimusmäärittely](https://github.com/oheinonen/ot-harjoitustyo/blob/master/dokumentaatio/vaatimusmaarittely.md)
+## Setup
+
+1. Install dependencies with command
+```bash
+poetry install
+```
+
+2. Execute initialization with command
+
+```bash
+poetry run invoke build
+```
+
+3. Start application with command
+
+```bash
+poetry run invoke start
+```
+
+## Terminal commands
+Run the application
+```bash
+poetry run invoke start
+```
+Run tests
+```bash
+poetry run invoke test
+```
+
+Create test coverage report
+```bash
+poetry run invoke coverage-report
+```
+
