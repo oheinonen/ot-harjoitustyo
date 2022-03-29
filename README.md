@@ -1,5 +1,5 @@
 # Budgeting application 
-This repository contains budgeting application made for Univerity of Helsinki course (Ohjelmistotekniikka)[https://courses.helsinki.fi/fi/tkt20002]
+This repository contains budgeting application made for Univerity of Helsinki course [Ohjelmistotekniikka](https://courses.helsinki.fi/fi/tkt20002)
 Purpose of this application is that the users can keep track on their expenses and income. The application can have multiple users, each having their own expenses and income.
 
 
