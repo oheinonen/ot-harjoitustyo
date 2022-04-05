@@ -12,7 +12,6 @@ def drop_tables(connection):
         drop table if exists expenses;
     ''')
 
-
     connection.commit()
 
 
@@ -24,12 +23,14 @@ def create_tables(connection):
             username text primary key,
             password text
         );
-    ''')    
-    
+    ''')
     cursor.execute('''
         create table expenses (
-            name text primary key,
-            value int
+            id int primary key, 
+            name text,
+            value int,
+            category text,
+            date date
         );
 
     ''')
@@ -39,7 +40,6 @@ def create_tables(connection):
 
 def initialize_database():
     connection = get_database_connection()
-
     drop_tables(connection)
     create_tables(connection)
 
