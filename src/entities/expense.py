@@ -1,8 +1,9 @@
 class Expense:
 
-    def __init__(self, id, name, value, category, date):
+    def __init__(self, expense_id, name, value, category, date, owner):
         self.name = name
         self.value = value
-        self.id = id
+        self.expense_id = expense_id
         self.category = category
         self.date = date
+        self.owner = owner

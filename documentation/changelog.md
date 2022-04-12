@@ -8,3 +8,8 @@
 - Main page shows added expenses from all users
 - Tested that user creation works and saves user information to the database
 - Tested that expense creation works and saves expense information to the database
+
+## Week 4
+- Expenses now include category, date and owner. Category can be anything for now
+- Created a class diagram of the software 
+- Main page shows only added expenses of the logged in user

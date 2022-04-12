@@ -1,5 +1,4 @@
 from entities.user import User
-from entities.expense import Expense
 
 from repositories.user_repository import (
     user_repository as default_user_repository
@@ -26,7 +25,6 @@ class ExpenseService:
         self._user = None
         self._user_repository = user_repository
         self._expense_repository = expense_repository
-        self._nof_expenses = 0
 
     def login(self, username, password):
         user = self._user_repository.find_by_username(username)
@@ -55,13 +53,22 @@ class ExpenseService:
         self._user = user
         return user
 
+    def get_current_user(self):
+        return self._user
+
     def create_expense(self, name, value, category):
-        expense = self._expense_repository.create(self._nof_expenses, name, value, category)
-        self._nof_expenses += 1
+        expense = self._expense_repository.create(
+            name, value, category, self._user.username)
         return expense
 
-    def find_all_expenses(self):
-        return self._expense_repository.find_all()
+    def stringify(self, expense):
+        return str(
+            expense['id']) + " " + expense['name'] + " " + \
+            str(expense['value']) + " " + expense['category']\
+             + " " + expense['date']
+
+    def find_all_expenses(self, owner):
+        return self._expense_repository.find_all(owner)
 
 
 expense_service = ExpenseService()

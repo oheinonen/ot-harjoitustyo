@@ -30,7 +30,8 @@ def create_tables(connection):
             name text,
             value int,
             category text,
-            date date
+            date date,
+            owner text
         );
 
     ''')
