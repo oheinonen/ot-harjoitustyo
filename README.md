@@ -42,3 +42,7 @@ Create test coverage report
 poetry run invoke coverage-report
 ```
 
+Test pylint
+```bash
+poetry run invoke lint
+```
