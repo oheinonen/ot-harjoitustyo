@@ -13,3 +13,10 @@
 - Expenses now include category, date and owner. Category can be anything for now
 - Created a class diagram of the software 
 - Main page shows only added expenses of the logged in user
+
+## Week 5
+- User can now add new categories
+- New expenses can be created only for categories created beforehand
+- User can remove expenses
+- User can remove categories
+- Main page shows all costs and categories of the logged in user

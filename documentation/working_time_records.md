@@ -7,5 +7,6 @@
 | 29.3. |   5.5  | Finishing user creation and login/logout functionalities, preliminary UI, adding possibility to add new expense, saviung data to SQL database |
 | 5.4. | 4 | Added categories, expenses are personal and user can only see own expenses|
 | 12.4. | 1 | Created class diagram, fixed tests |
+|20.4.|3.5| Category entity added, user can add own categories and remove them and own expenses|
 
-| Total   | 16  | | 
+| Total   | 19.5  | | 

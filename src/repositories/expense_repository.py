@@ -29,6 +29,15 @@ class ExpenseRepository:
         expense = self.find_by_id(expense_id)
 
         return expense
+    
+    def remove(self,expense_id):
+        cursor = self._connection.cursor()
+        cursor.execute(
+            'delete from expenses where id = ?',
+            (expense_id,)
+        )
+        self._connection.commit()
+        return True
 
     def find_by_id(self, expense_id):
         cursor = self._connection.cursor()

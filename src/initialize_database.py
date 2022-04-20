@@ -12,6 +12,12 @@ def drop_tables(connection):
         drop table if exists expenses;
     ''')
 
+    cursor.execute('''
+        drop table if exists categories;
+    ''')
+
+
+
     connection.commit()
 
 
@@ -35,6 +41,14 @@ def create_tables(connection):
         );
 
     ''')
+    cursor.execute('''
+        create table categories (
+            name text primary key, 
+            owner text
+        );
+
+    ''')
+
 
     connection.commit()
 
