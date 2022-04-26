@@ -8,5 +8,5 @@
 | 5.4. | 4 | Added categories, expenses are personal and user can only see own expenses|
 | 12.4. | 1 | Created class diagram, fixed tests |
 |20.4.|3.5| Category entity added, user can add own categories and remove them and own expenses|
-
-| Total   | 19.5  | | 
+|26.4.|5| Added sequence diagram about creating new expense, created own page for expense where they can be updated|
+| Total   | 24.5  | | 
