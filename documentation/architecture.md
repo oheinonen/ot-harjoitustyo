@@ -23,3 +23,17 @@ classDiagram
     Ui "1" --|> "1" ExpenseService
 
 ```
+
+## Creating new expense 
+````mermaid 
+sequenceDiagram
+    actor User
+    User ->> UI: click "Add!" button
+    UI ->> ExpenseService: create_expense("Hamburger", 10, "Food")
+    participant ExpenseRepository
+    ExpenseService ->> Expense: Expense("Hamburger", 10, "Food", 2022-04-26, Oskari)
+    ExpenseService ->> ExpenseRepository: create(expense)
+    ExpenseRepository -->> ExpenseService: expense
+    ExpenseService -->> UI: expense
+    UI ->> UI: initialize_expense_list()
+```

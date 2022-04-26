@@ -1,5 +1,5 @@
 from tkinter import ttk, constants
-from services.expense_service import expense_service, InvalidCredentialsError
+from services.user_service import user_service, InvalidCredentialsError
 
 
 class LoginView:
@@ -65,5 +65,5 @@ class LoginView:
         username = self._username_entry.get()
         password = self._password_entry.get()
 
-        expense_service.login(username, password)
+        user_service.login(username, password)
         self._handle_login()

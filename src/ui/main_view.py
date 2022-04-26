@@ -1,7 +1,7 @@
-from cmath import exp
-from nis import cat
 from tkinter import ttk, constants, StringVar
 from services.expense_service import expense_service
+from services.category_service import category_service
+from services.user_service import user_service
 
 
 class ExpenseListView:
@@ -25,14 +25,23 @@ class ExpenseListView:
             master=expense_frame, text=expense_service.stringify_expense(expense))
         expense_label.grid(
             row=0, column=0, sticky=constants.EW, padx=5, pady=5)
+
+        update_expense_button = ttk.Button(
+            master=expense_frame,
+            text="update",
+            command=lambda: self._mainView._handle_show_expense_view(expense)
+        )
+        update_expense_button.grid(
+            row=0, column=1, sticky=constants.EW, padx=5, pady=5)
+
         remove_expense_button = ttk.Button(
             master=expense_frame,
             text="remove",
-            command= lambda: self._mainView._remove_expense_handler(expense[0])
+            command=lambda: self._mainView._remove_expense_handler(expense[0])
         )
         remove_expense_button.grid(
-            row=0,column=1, sticky=constants.EW, padx=5, pady=5)
-        
+            row=0, column=2, sticky=constants.EW, padx=5, pady=5)
+
         expense_frame.grid_columnconfigure(0, weight=1)
         expense_frame.pack(fill=constants.X)
 
@@ -40,6 +49,7 @@ class ExpenseListView:
         self._frame = ttk.Frame(master=self._root)
         for expense in self._expenses:
             self._initialize_expense_item(expense)
+
 
 class CategoryListView:
     def __init__(self, mainView, root, categories):
@@ -59,17 +69,17 @@ class CategoryListView:
     def _initialize_category_item(self, category):
         category_frame = ttk.Frame(master=self._frame)
         category_label = ttk.Label(
-            master=category_frame, text=expense_service.stringify_category(category))
+            master=category_frame, text=category_service.stringify_category(category))
         category_label.grid(
             row=0, column=0, sticky=constants.EW, padx=5, pady=5)
         remove_category_button = ttk.Button(
             master=category_frame,
             text="remove",
-            command= lambda: self._mainView._remove_category_handler(category)
+            command=lambda: self._mainView._remove_category_handler(category)
         )
         remove_category_button.grid(
             row=0, column=1, sticky=constants.EW, padx=5, pady=5)
-        
+
         category_frame.grid_columnconfigure(0, weight=1)
         category_frame.pack(fill=constants.X)
 
@@ -80,9 +90,9 @@ class CategoryListView:
 
 
 class MainView:
-    def __init__(self, root, handle_show_login_view):
+    def __init__(self, root, handle_show_login_view, handle_show_expense_view):
         self._root = root
-        self._user = expense_service.get_current_user()
+        self._user = user_service.get_current_user()
         self._frame = None
         self._name_entry = None
         self._value_entry = None
@@ -92,6 +102,7 @@ class MainView:
         self._category_list_frame = None
         self._expense_list_frame = None
         self._handle_show_login_view = handle_show_login_view
+        self._handle_show_expense_view = handle_show_expense_view
 
         self._initialize()
 
@@ -130,7 +141,7 @@ class MainView:
     def _initialize_category_list(self):
         if self._category_list_view:
             self._category_list_view.destroy()
-        categories = expense_service.find_all_categories_for_user()
+        categories = category_service.find_all_categories_for_user()
         self._category_list_view = CategoryListView(
             self,
             self._category_list_frame,
@@ -157,18 +168,18 @@ class MainView:
             row=4, column=1, sticky=constants.E, padx=5, pady=5)
 
         category_label = ttk.Label(master=self._frame, text="Category:")
-        categories=expense_service.find_all_categories_for_user_text()
+        categories = category_service.find_all_categories_for_user_text()
         variable = StringVar()
 
         self._category_dropdown = ttk.OptionMenu(self._frame,
-                                                variable,
-                                                categories[1],
-                                                *categories)
+                                                 variable,
+                                                 categories[0],
+                                                 *categories)
         category_label.grid(
             row=5, column=0, sticky=constants.EW, padx=5, pady=5)
         self._category_dropdown.grid(
             row=5, column=1, sticky=constants.E, padx=5, pady=5)
-        
+
         self._category_entry = variable
 
         create_expense_button = ttk.Button(
@@ -177,13 +188,13 @@ class MainView:
             command=self._create_expense_handler
         )
         create_expense_button.grid(
-            row= 6, column=1, sticky=constants.EW, padx=5, pady=5)
+            row=6, column=1, sticky=constants.EW, padx=5, pady=5)
 
     def _initialize_category(self):
         new_category_label = ttk.Label(
             master=self._frame, text="Add new category", font=24)
         new_category_label.grid(row=7, column=0, columnspan=2,
-                           sticky=constants.EW, padx=5, pady=5)
+                                sticky=constants.EW, padx=5, pady=5)
         self._new_category_entry = ttk.Entry(master=self._frame)
         self._new_category_entry.grid(
             row=7, column=1, sticky=constants.EW, padx=5, pady=5)
@@ -194,8 +205,7 @@ class MainView:
             command=self._create_category_handler
         )
         create_new_category_button.grid(
-            row=8,column=1, sticky=constants.EW, padx=5, pady=5)
-
+            row=8, column=1, sticky=constants.EW, padx=5, pady=5)
 
     def _initialize(self):
         self._frame = ttk.Frame(master=self._root)
@@ -224,7 +234,7 @@ class MainView:
         self._frame.grid_columnconfigure(1, weight=0)
 
     def _handle_logout(self):
-        expense_service.logout()
+        user_service.logout()
         self._handle_show_login_view()
 
     def _create_expense_handler(self):
@@ -236,18 +246,20 @@ class MainView:
             self._initialize_expense_list()
             self._name_entry.delete(0, constants.END)
             self._value_entry.delete(0, constants.END)
-            
+
     def _create_category_handler(self):
         category = self._new_category_entry.get()
         if category:
-            expense_service.create_category_for_user(category)
+            category_service.create_category_for_user(category)
             self._initialize_category_list()
+            self._initialize_expense()
             self._new_category_entry.delete(0, constants.END)
 
-    def _remove_expense_handler(self,expense_id):
+    def _remove_expense_handler(self, expense_id):
         expense_service.remove_expense(expense_id)
         self._initialize_expense_list()
 
-    def _remove_category_handler(self,category):
-        expense_service.remove_category_from_user(category)
+    def _remove_category_handler(self, category):
+        category_service.remove_category_from_user(category)
         self._initialize_category_list()
+        self._initialize_expense()

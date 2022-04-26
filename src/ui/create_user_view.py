@@ -1,5 +1,5 @@
 from tkinter import ttk, constants
-from services.expense_service import expense_service, UsernameExistsError
+from services.user_service import user_service, UsernameExistsError
 
 
 class CreateUserView:
@@ -65,5 +65,5 @@ class CreateUserView:
         username = self._username_entry.get()
         password = self._password_entry.get()
 
-        expense_service.create_user(username, password)
+        user_service.create_user(username, password)
         self._handle_create_user()
