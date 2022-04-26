@@ -12,7 +12,7 @@ There are only one type of users, normal users.
 - [x] The user can log in 
   - [x] Log in is done by giving username and correct password to the login form 
   - If the username doesn't exist or the password isn't correct, the application shows an error
-### After signing in```
+### After signing in
 - [x] The user can see own expenses 
   - Later the expenses can be listed eg. via category 
     - and maybe with a graph?
