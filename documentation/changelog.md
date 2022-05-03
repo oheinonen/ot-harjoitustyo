@@ -16,7 +16,8 @@
 
 ## Week 5
 - User can now add new categories
-- New expenses can be created only for categories created beforehand
+- New expenses can be created only for categories created beforehand (dropdown menu)
 - User can remove expenses
 - User can remove categories
-- Main page shows all costs and categories of the logged in user
+- User can update expenses in expense page
+- Main page shows all costs and categories of the logged in user, with buttons to remove or update them

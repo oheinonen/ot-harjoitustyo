@@ -25,7 +25,9 @@ classDiagram
 ```
 
 ## Creating new expense 
-````mermaid 
+
+```mermaid
+
 sequenceDiagram
     actor User
     User ->> UI: click "Add!" button
