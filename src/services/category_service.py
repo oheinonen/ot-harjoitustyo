@@ -17,7 +17,7 @@ class CategoryService:
 
     ):
         self._category_repository = category_repository
-        self._user = user_service._user
+        self._user = None
 
     def create_category_for_user(self, category):
 
@@ -40,6 +40,7 @@ class CategoryService:
         return self._category_repository.find_all(self._user.username)
 
     def find_all_categories_for_user_text(self):
+        self._user = user_service.get_current_user()
         categories = self._category_repository.find_all(
             self._user.username)
         categories_text = ['Other']

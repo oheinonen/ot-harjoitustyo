@@ -27,14 +27,12 @@ class UserService:
             raise InvalidCredentialsError('Invalid username or password')
 
         self._user = user
-
         return user
 
     def logout(self):
         self._user = None
 
     def create_user(self, username, password):
-        print("HALOO", username, password)
         existing_user = self._user_repository.find_by_username(username)
 
         if existing_user:
