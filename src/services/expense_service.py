@@ -9,13 +9,31 @@ from repositories.expense_repository import (
 
 
 class ExpenseService:
+    """Class that is responsible for the application logic related to Expense objects
+    """
+
     def __init__(
         self,
         expense_repository=default_expense_repository
     ):
+        """Constructor for the class. Creates new class for application logic related to Expense objects
+
+        Args:
+            expense_repository (ExpenseRepository, optional): Object that has same methods as ExpenseRepository. Defaults to default_expense_repository.
+        """
         self._expense_repository = expense_repository
 
     def create_expense(self, name, value, category):
+        """Creates new expense
+
+        Args:
+            name (String): name of the expense given by the user
+            value (String): value of the expense given by the user
+            category (Category): Category Object given by the user
+
+        Returns:
+            Expense: The expense created 
+        """
         date = datetime.datetime.now().strftime("%d/%m/%Y")
         expense_id = self._expense_repository.next_id()
         if not expense_id:
@@ -26,6 +44,17 @@ class ExpenseService:
         return expense
 
     def update_expense(self, expense, name, value, category):
+        """Updates information of specific expense
+
+        Args:
+            expense (Expense): Expense object that will be updated
+            name (String): new name of the expense given by the user
+            value (String): new value of the expense given by the user
+            category (Category): new Category Object given by the user
+
+        Returns:
+            Expense: the updated Expense
+        """
         expense = self._expense_repository.update(
             expense, name, value, category)
         return expense
@@ -34,6 +63,14 @@ class ExpenseService:
         return self._expense_repository.remove(expense_id)
 
     def stringify_expense(self, expense):
+        """Makes specific Expense object into more readable format
+
+        Args:
+            expense (Expense): the expense that is wanted to be formatted
+
+        Returns:
+            String: Expense in readable format
+        """
         return str(
             expense['expense_id']) + " " + expense['name'] + " " + \
             str(expense['value']) + " " + expense['category']\

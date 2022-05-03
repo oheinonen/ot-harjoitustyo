@@ -7,12 +7,26 @@ def get_user_by_row(row):
 
 
 class UserRepository:
+    """ Class responsible for database operations of User objects
+    """
 
     def __init__(self, connection):
+        """Constructor for the class
+
+        Args:
+            connection: Connection object for the database
+        """
         self._connection = connection
 
     def create(self, user):
+        """Saves new User to the database
 
+        Args:
+            user (User): User object to be saved to the database
+
+        Returns:
+            User: User object saved to the database
+        """
         cursor = self._connection.cursor()
 
         cursor.execute(
@@ -25,6 +39,14 @@ class UserRepository:
         return user
 
     def find_by_username(self, username):
+        """Helps to find specified expense by username 
+
+        Args:
+            username (String): text corresponding to username 
+
+        Returns:
+            User: User object corresponding to the given input
+        """
 
         cursor = self._connection.cursor()
 

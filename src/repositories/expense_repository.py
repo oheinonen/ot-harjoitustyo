@@ -9,12 +9,27 @@ def get_expense_by_row(row):
     return None
 
 
-class ExpenseRepository:
+class ExpenseRepository:    
+    """ Class responsible for database operations of Expense objects
+    """
 
     def __init__(self, connection):
+        """Constructor for the class
+
+        Args:
+            connection: Connection object for the database
+        """
         self._connection = connection
 
     def create(self, expense):
+        """Saves new Expense to the database
+
+        Args:
+            expense (Expense): Expense object to be saved into the database
+
+        Returns:
+            Expense: Expense object saved to the database
+        """
 
         cursor = self._connection.cursor()
 
@@ -30,6 +45,17 @@ class ExpenseRepository:
         return expense
 
     def update(self, expense_row, new_name, new_value, new_category):
+        """Updates existing Expense and saves information to the database
+
+        Args:
+            expense_row (Expense): array containing Expense object
+            new_name (String): name given by the user to be updated to corresponding Expense object
+            new_value (String): value given by the user to be updated to corresponding Expense object
+            new_category (Cateory): category given by the user to be updated to corresponding Expense object
+
+        Returns:
+            Expense: the updated Expense object
+        """
         cursor = self._connection.cursor()
         expense = get_expense_by_row(expense_row)
         cursor.execute(
@@ -60,6 +86,15 @@ class ExpenseRepository:
 
 
     def find_by_id(self, expense_id):
+        """Helps to find specified expense by id 
+
+        Args:
+            expense_id (Int): Number corresponding to expense id 
+
+        Returns:
+            Expense: Expense object corresponding to the given input
+        """
+
         cursor = self._connection.cursor()
         cursor.execute(
             'select * from expenses where expense_id = ?',
@@ -69,6 +104,12 @@ class ExpenseRepository:
         return get_expense_by_row(row)
 
     def next_id(self):
+        """Helper function to calculate next id
+
+        Returns:
+            Int: next available id number
+        """
+
         cursor = self._connection.cursor()
         cursor.execute(
             'select expense_id from expenses order by expense_id desc limit 1'

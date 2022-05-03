@@ -8,10 +8,10 @@ There are only one type of users, normal users.
 ## Functionalities
 ### Before signing in
 - [x] The user can create and account 
-  - [x]The username must be unique and between 4 and 99 characters
+  - [x] The username must be unique and between 4 and 99 characters
 - [x] The user can log in 
   - [x] Log in is done by giving username and correct password to the login form 
-  - If the username doesn't exist or the password isn't correct, the application shows an error
+  - [x] If the username doesn't exist or the password isn't correct, the application shows an error
 ### After signing in
 - [x] The user can see own expenses 
   - Later the expenses can be listed eg. via category 

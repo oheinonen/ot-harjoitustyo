@@ -21,3 +21,6 @@
 - User can remove categories
 - User can update expenses in expense page
 - Main page shows all costs and categories of the logged in user, with buttons to remove or update them
+
+## Week 6
+- Application shows errors with bad input

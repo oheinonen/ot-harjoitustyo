@@ -1,4 +1,5 @@
 from entities.category import Category
+from tkinter import messagebox
 from services.user_service import user_service
 
 from repositories.category_repository import (
@@ -6,21 +7,32 @@ from repositories.category_repository import (
 )
 
 
-class CategoryExistsError(Exception):
-    pass
-
-
 class CategoryService:
+    """Class that is responsible for the application logic related to Category objects
+    """
+
     def __init__(
         self,
         category_repository=default_category_repository
 
     ):
+        """Constructor for the class. Creates new class for application logic related to Category objects
+
+        Args:
+            category_repository (CategoryRepository, optional): Object that has same methods as CategoryRepository. Defaults to default_category_repository.
+        """
         self._category_repository = category_repository
         self._user = None
 
     def create_category_for_user(self, category):
+        """Creates new cateory for the user that is logged in
 
+        Args:
+            category (String): name of the category given by the user
+
+        Returns:
+            Category: the created category if it doesn't alreay exist
+        """
         category_id = self._category_repository.next_id()
         if not category_id:
             category_id = 0
@@ -29,7 +41,8 @@ class CategoryService:
             category, self._user.username)
 
         if existing_category:
-            raise CategoryExistsError(f'Category {category} already exists')
+            messagebox.showinfo('',f'Category {category} already exists')
+            return False
 
         category = self._category_repository.create(
             Category(category_id, category, self._user.username))
@@ -40,9 +53,13 @@ class CategoryService:
         return self._category_repository.find_all(self._user.username)
 
     def find_all_categories_for_user_text(self):
+        """Responsible for retrieving all categories of specific user
+
+        Returns:
+            Category: list of Categories of logged in user
+        """
         self._user = user_service.get_current_user()
-        categories = self._category_repository.find_all(
-            self._user.username)
+        categories = self._category_repository.find_all(self._user.username)
         categories_text = ['Other']
         for category in categories:
             categories_text.append(category['name'])

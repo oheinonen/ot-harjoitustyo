@@ -6,12 +6,23 @@ from ui.expense_view import ExpenseView
 
 
 class UI:
+    """
+    This class is responsible for the user interface of this application
+    """
+
     def __init__(self, root):
+        """Constructor for the class. Creates new user interface class.
+
+        Args:
+            root : tkInter element where the ui will be outlined
+        """
         self._root = root
         self._current_view = None
         self._user = None
 
     def start(self):
+        """ Used to start the ui of the application 
+        """
         self._show_login_view()
 
     def _hide_current_view(self):
@@ -21,6 +32,8 @@ class UI:
         self._current_view = None
 
     def _show_login_view(self):
+        """Changes ui from previous view to the login view
+        """
         self._hide_current_view()
 
         self._current_view = LoginView(
@@ -32,6 +45,8 @@ class UI:
         self._current_view.pack()
 
     def _show_main_view(self):
+        """Changes ui from previous view to the main view
+        """
         self._hide_current_view()
 
         self._current_view = MainView(
@@ -43,6 +58,9 @@ class UI:
         self._current_view.pack()
 
     def _show_create_user_view(self):
+        """Changes ui from previous view to create user view
+        """
+
         self._hide_current_view()
 
         self._current_view = CreateUserView(
@@ -54,6 +72,9 @@ class UI:
         self._current_view.pack()
 
     def _show_expense_view(self, expense):
+        """Changes ui from previous view to the expense view
+        """
+
         self._hide_current_view()
 
         self._current_view = ExpenseView(

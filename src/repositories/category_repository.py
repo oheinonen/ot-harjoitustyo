@@ -7,11 +7,26 @@ def get_category_by_row(row):
 
 
 class CategoryRepository:
+    """ Class responsible for database operations of Category objects
+    """
 
     def __init__(self, connection):
+        """Constructor for the class
+
+        Args:
+            connection: Connection object for the database
+        """
         self._connection = connection
 
     def create(self, category):
+        """Saves new category to the database
+
+        Args:
+            category (Category): Category to be saved to the database
+
+        Returns:
+            Category: Category object that is saved to the database
+        """
         cursor = self._connection.cursor()
 
         cursor.execute(
@@ -25,6 +40,14 @@ class CategoryRepository:
         return category
 
     def remove(self, category):
+        """Removes the specified category from the database
+
+        Args:
+            category (Category): Category to be deleted
+
+        Returns:
+            Boolean: currently always true
+        """
         cursor = self._connection.cursor()
         cursor.execute(
             'delete from categories where name = ?',
@@ -34,6 +57,14 @@ class CategoryRepository:
         return True
 
     def find_by_id(self, category_id):
+        """Helps to find specified category by id 
+
+        Args:
+            category_id (Int): Number corresponding to category id 
+
+        Returns:
+            Category: Category object corresponding to the given input
+        """
         cursor = self._connection.cursor()
         cursor.execute(
             'select * from categories where category_id = ?',
@@ -43,6 +74,16 @@ class CategoryRepository:
         return get_category_by_row(row)
 
     def find_by_name_and_owner(self, name, owner):
+        """Helps to find specified category by name and owner
+
+        Args:
+            name (String): text corresponding to category name 
+            owner (String): tect corresponding to category owner 
+
+        Returns:
+            Category: Category object corresponding to the given input
+        """
+
         cursor = self._connection.cursor()
         cursor.execute(
             'select * from categories where name = ? and owner = ?',
@@ -52,6 +93,11 @@ class CategoryRepository:
         return get_category_by_row(row)
 
     def next_id(self):
+        """Helper function to calculate next id
+
+        Returns:
+            Int: next available id number
+        """
         cursor = self._connection.cursor()
         cursor.execute(
             'select category_id from categories order by category_id desc limit 1'
