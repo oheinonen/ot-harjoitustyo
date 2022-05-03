@@ -9,5 +9,5 @@
 | 12.4. | 1 | Created class diagram, fixed tests |
 |20.4.|3.5| Category entity added, user can add own categories and remove them and own expenses|
 |26.4.|5| Added sequence diagram about creating new expense, created own page for expense where they can be updated|
-|3.5.|| Lot of Docstring documentation, app shows error with bad input, instructions to use|
-| Total   | 24.5  | | 
+|3.5.|4| Lot of Docstring documentation, app shows error with bad input, instructions to use created and more information on architecture given|
+| Total   | 28.5  | | 
