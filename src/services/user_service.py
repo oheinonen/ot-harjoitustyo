@@ -1,20 +1,25 @@
-from entities.user import User
 from tkinter import messagebox
+from entities.user import User
 from repositories.user_repository import (
     user_repository as default_user_repository
 )
 
+
 class UserService:
     """Class that is responsible for the application logic related to User objects
     """
+
     def __init__(
         self,
         user_repository=default_user_repository
     ):
-        """Constructor for the class. Creates new class for application logic related to User objects
+        """Constructor for the class.
+            Creates new class for application logic related to User objects
 
         Args:
-            user_repository (UserRepository, optional): Object that has same methods as UserRepository. Defaults to default_user_repository.
+            user_repository (UserRepository, optional):
+            Object that has same methods as UserRepository.
+            Defaults to default_user_repository.
         """
         self._user = None
         self._user_repository = user_repository
@@ -31,7 +36,7 @@ class UserService:
         """
         user = self._user_repository.find_by_username(username)
         if not user or user.password != password:
-            messagebox.showinfo('','Invalid username or password')
+            messagebox.showinfo('', 'Invalid username or password')
             return False
         self._user = user
         return user
@@ -54,11 +59,12 @@ class UserService:
         existing_user = self._user_repository.find_by_username(username)
 
         if existing_user:
-            messagebox.showinfo('',f'Username {username} already exists')
+            messagebox.showinfo('', f'Username {username} already exists')
             return False
 
         if 4 > len(username) or len(username) >= 99:
-            messagebox.showinfo('', f'Username {username} must be between 4 and 99 characters')
+            messagebox.showinfo(
+                '', f'Username {username} must be between 4 and 99 characters')
             return False
 
         user = self._user_repository.create(User(username, password))

@@ -39,10 +39,10 @@ class UserRepository:
         return user
 
     def find_by_username(self, username):
-        """Helps to find specified expense by username 
+        """Helps to find specified expense by username
 
         Args:
-            username (String): text corresponding to username 
+            username (String): text corresponding to username
 
         Returns:
             User: User object corresponding to the given input

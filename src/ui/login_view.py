@@ -5,6 +5,7 @@ from services.user_service import user_service
 class LoginView:
     """View responsible for user logins
     """
+
     def __init__(self, root, handle_login, handle_show_create_user_view):
         """Constructor for the class. Creates new LoginView
 
@@ -45,7 +46,7 @@ class LoginView:
         password_label.grid(sticky=constants.W, padx=5, pady=5)
         self._password_entry.grid(
             row=2, column=1, sticky=constants.EW, padx=5, pady=5)
-    
+
     def _initialize_login_button(self):
         login_button = ttk.Button(
             master=self._frame,
@@ -64,7 +65,6 @@ class LoginView:
 
         create_user_button.grid(
             row=3, column=1, sticky=constants.W, padx=5, pady=5)
-
 
     def _initialize(self):
         """Creates the frame where the login view is build with the help of other functions

@@ -9,7 +9,7 @@ def get_expense_by_row(row):
     return None
 
 
-class ExpenseRepository:    
+class ExpenseRepository:
     """ Class responsible for database operations of Expense objects
     """
 
@@ -49,9 +49,12 @@ class ExpenseRepository:
 
         Args:
             expense_row (Expense): array containing Expense object
-            new_name (String): name given by the user to be updated to corresponding Expense object
-            new_value (String): value given by the user to be updated to corresponding Expense object
-            new_category (Cateory): category given by the user to be updated to corresponding Expense object
+            new_name (String):
+            name given by the user to be updated to corresponding Expense object
+            new_value (String):
+            value given by the user to be updated to corresponding Expense object
+            new_category (Cateory):
+            category given by the user to be updated to corresponding Expense object
 
         Returns:
             Expense: the updated Expense object
@@ -84,12 +87,11 @@ class ExpenseRepository:
         expenses = cursor.fetchall()
         return expenses
 
-
     def find_by_id(self, expense_id):
-        """Helps to find specified expense by id 
+        """Helps to find specified expense by id
 
         Args:
-            expense_id (Int): Number corresponding to expense id 
+            expense_id (Int): Number corresponding to expense id
 
         Returns:
             Expense: Expense object corresponding to the given input

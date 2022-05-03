@@ -16,10 +16,13 @@ class ExpenseService:
         self,
         expense_repository=default_expense_repository
     ):
-        """Constructor for the class. Creates new class for application logic related to Expense objects
+        """Constructor for the class.
+        Creates new class for application logic related to Expense objects
 
         Args:
-            expense_repository (ExpenseRepository, optional): Object that has same methods as ExpenseRepository. Defaults to default_expense_repository.
+            expense_repository (ExpenseRepository, optional):
+            Object that has same methods as ExpenseRepository.
+            Defaults to default_expense_repository.
         """
         self._expense_repository = expense_repository
 
@@ -32,15 +35,15 @@ class ExpenseService:
             category (Category): Category Object given by the user
 
         Returns:
-            Expense: The expense created 
+            Expense: The expense created
         """
         date = datetime.datetime.now().strftime("%d/%m/%Y")
         expense_id = self._expense_repository.next_id()
         if not expense_id:
             expense_id = 0
-
+        user = user_service.get_current_user()
         expense = self._expense_repository.create(
-            Expense(expense_id, name, value, category, date, user_service._user.username))
+            Expense(expense_id, name, value, category, date, user.username))
         return expense
 
     def update_expense(self, expense, name, value, category):

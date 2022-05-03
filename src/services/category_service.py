@@ -1,5 +1,5 @@
-from entities.category import Category
 from tkinter import messagebox
+from entities.category import Category
 from services.user_service import user_service
 
 from repositories.category_repository import (
@@ -16,10 +16,13 @@ class CategoryService:
         category_repository=default_category_repository
 
     ):
-        """Constructor for the class. Creates new class for application logic related to Category objects
+        """Constructor for the class.
+            Creates new class for application logic related to Category objects
 
         Args:
-            category_repository (CategoryRepository, optional): Object that has same methods as CategoryRepository. Defaults to default_category_repository.
+            category_repository (CategoryRepository, optional):
+            Object that has same methods as CategoryRepository.
+            Defaults to default_category_repository.
         """
         self._category_repository = category_repository
         self._user = None
@@ -41,7 +44,7 @@ class CategoryService:
             category, self._user.username)
 
         if existing_category:
-            messagebox.showinfo('',f'Category {category} already exists')
+            messagebox.showinfo('', f'Category {category} already exists')
             return False
 
         category = self._category_repository.create(

@@ -57,10 +57,10 @@ class CategoryRepository:
         return True
 
     def find_by_id(self, category_id):
-        """Helps to find specified category by id 
+        """Helps to find specified category by id
 
         Args:
-            category_id (Int): Number corresponding to category id 
+            category_id (Int): Number corresponding to category id
 
         Returns:
             Category: Category object corresponding to the given input
@@ -77,8 +77,8 @@ class CategoryRepository:
         """Helps to find specified category by name and owner
 
         Args:
-            name (String): text corresponding to category name 
-            owner (String): tect corresponding to category owner 
+            name (String): text corresponding to category name
+            owner (String): tect corresponding to category owner
 
         Returns:
             Category: Category object corresponding to the given input

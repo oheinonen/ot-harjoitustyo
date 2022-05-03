@@ -7,6 +7,7 @@ from services.user_service import user_service
 class ExpenseListView:
     """View that is responsible for listing expenses
     """
+
     def __init__(self, mainView, root, expenses):
         """Constructor for the class. Creates new expense list view
 
@@ -74,6 +75,7 @@ class ExpenseListView:
 class CategoryListView:
     """View that is responsible for listing categories
     """
+
     def __init__(self, mainView, root, categories):
         """Constructor for the class. Creates new category list view
 
@@ -133,6 +135,7 @@ class CategoryListView:
 class MainView:
     """View responsible for showing existing expenses and categories and creating new ones
     """
+
     def __init__(self, root, handle_logout, handle_show_expense_view):
         """Constructor for the class. Creates new main view
 
@@ -245,7 +248,7 @@ class MainView:
         self._category_dropdown.grid(
             row=5, column=1, sticky=constants.E, padx=5, pady=5)
         self._category_entry = variable
-    
+
     def _initialize_expense_submit_button(self):
         create_expense_button = ttk.Button(
             master=self._frame,
@@ -284,14 +287,12 @@ class MainView:
         create_new_category_button.grid(
             row=8, column=1, sticky=constants.EW, padx=5, pady=5)
 
-
     def _initialize_category(self):
         """Initializes form where user can add new category
         """
         self._initialize_cateory_label()
         self._initialize_cateory_name_field()
         self._initialize_cateory_submit_button()
-        
 
     def _initialize(self):
         """Creates the frame where the view is build with the help of other functions
