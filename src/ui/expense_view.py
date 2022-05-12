@@ -47,14 +47,14 @@ class ExpenseView:
 
         name_label = ttk.Label(master=self._frame, text="Name:")
         self._name_entry = ttk.Entry(master=self._frame)
-        self._name_entry.insert(0, self._expense['name'])
+        self._name_entry.insert(0, self._expense.name)
         name_label.grid(row=3, column=0, sticky=constants.EW, padx=5, pady=5)
         self._name_entry.grid(
             row=3, column=1, sticky=constants.E, padx=5, pady=5)
 
         value_label = ttk.Label(master=self._frame, text="Value:")
         self._value_entry = ttk.Entry(master=self._frame)
-        self._value_entry.insert(0, self._expense['value'])
+        self._value_entry.insert(0, self._expense.value)
         value_label.grid(row=4, column=0, sticky=constants.EW, padx=5, pady=5)
         self._value_entry.grid(
             row=4, column=1, sticky=constants.E, padx=5, pady=5)
@@ -65,7 +65,7 @@ class ExpenseView:
 
         self._category_dropdown = ttk.OptionMenu(self._frame,
                                                  variable,
-                                                 self._expense['category'],
+                                                 self._expense.category,
                                                  *categories)
         category_label.grid(
             row=5, column=0, sticky=constants.EW, padx=5, pady=5)

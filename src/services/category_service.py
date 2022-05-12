@@ -68,7 +68,9 @@ class CategoryService:
             categories_text.append(category['name'])
         return categories_text
 
-    def remove_category_from_user(self, category):
+    def remove_category_from_user(self, category_name):
+        self._user = user_service.get_current_user()
+        category = self._category_repository.find_by_name_and_owner(category_name,self._user.username)
         return self._category_repository.remove(category)
 
     def stringify_category(self, category):

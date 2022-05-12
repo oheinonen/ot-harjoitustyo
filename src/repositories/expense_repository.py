@@ -44,7 +44,7 @@ class ExpenseRepository:
 
         return expense
 
-    def update(self, expense_row, new_name, new_value, new_category):
+    def update(self, expense, new_name, new_value, new_category):
         """Updates existing Expense and saves information to the database
 
         Args:
@@ -60,7 +60,6 @@ class ExpenseRepository:
             Expense: the updated Expense object
         """
         cursor = self._connection.cursor()
-        expense = get_expense_by_row(expense_row)
         cursor.execute(
             'update expenses set name = ?, value = ?, category = ? where expense_id = ?',
             (new_name, new_value, new_category, expense.expense_id)

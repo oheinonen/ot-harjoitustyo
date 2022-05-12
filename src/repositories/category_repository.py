@@ -51,7 +51,7 @@ class CategoryRepository:
         cursor = self._connection.cursor()
         cursor.execute(
             'delete from categories where name = ?',
-            (category['name'],)
+            (category.name,)
         )
         self._connection.commit()
         return True

@@ -61,6 +61,10 @@ class ExpenseService:
         expense = self._expense_repository.update(
             expense, name, value, category)
         return expense
+    
+    def get_expense_by_id(self, expense_id):
+        expense = self._expense_repository.find_by_id(expense_id)
+        return expense
 
     def remove_expense(self, expense_id):
         return self._expense_repository.remove(expense_id)
@@ -74,7 +78,7 @@ class ExpenseService:
         Returns:
             String: Expense in readable format
         """
-        return str(
+        return '#' + str(
             expense['expense_id']) + " " + expense['name'] + " " + \
             str(expense['value']) + " " + expense['category']\
             + " " + expense['date']
