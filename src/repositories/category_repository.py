@@ -115,6 +115,17 @@ class CategoryRepository:
         )
         categories = cursor.fetchall()
         return categories
+    
+    def find_by_name_and_owner(self, category, owner):
+        cursor = self._connection.cursor()
+
+        cursor.execute(
+            'select * from categories where name = ? and owner = ?',
+            (category, owner.username)
+        )
+        row = cursor.fetchone()
+        return get_category_by_row(row)
+
 
     def delete_all(self):
         cursor = self._connection.cursor()

@@ -85,6 +85,17 @@ class ExpenseRepository:
         )
         expenses = cursor.fetchall()
         return expenses
+    
+    def find_all_by_category(self, category, owner):
+        cursor = self._connection.cursor()
+        cursor.execute(
+            'select * from expenses where category = ? and owner = ?',
+            (category.name, owner.username)
+        )
+        expenses = cursor.fetchall()
+        return expenses
+
+    
 
     def find_by_id(self, expense_id):
         """Helps to find specified expense by id

@@ -25,6 +25,7 @@ class ExpenseService:
             Defaults to default_expense_repository.
         """
         self._expense_repository = expense_repository
+        self._user = None
 
     def create_expense(self, name, value, category):
         """Creates new expense
@@ -65,6 +66,11 @@ class ExpenseService:
     def get_expense_by_id(self, expense_id):
         expense = self._expense_repository.find_by_id(expense_id)
         return expense
+    
+    def get_expenses_by_category(self, category):
+        self._user = user_service.get_current_user()
+        expenses = self._expense_repository.find_all_by_category(category, self._user)
+        return expenses 
 
     def remove_expense(self, expense_id):
         return self._expense_repository.remove(expense_id)

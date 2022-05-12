@@ -1,8 +1,10 @@
 import imp
+from entities.category import Category
 from ui.login_view import LoginView
 from ui.create_user_view import CreateUserView
 from ui.main_view import MainView
 from ui.expense_view import ExpenseView
+from ui.category_view import CategoryView
 
 
 class UI:
@@ -52,7 +54,8 @@ class UI:
         self._current_view = MainView(
             self._root,
             self._show_login_view,
-            self._show_expense_view
+            self._show_expense_view,
+            self._show_category_view
         )
 
         self._current_view.pack()
@@ -81,5 +84,19 @@ class UI:
             self._root,
             self._show_main_view,
             expense
+        )
+        self._current_view.pack()
+
+    def _show_category_view(self, category):
+        """Changes ui from previous view to the expense view
+        """
+
+        self._hide_current_view()
+
+        self._current_view = CategoryView(
+            self._root,
+            self._show_main_view,
+            self._show_expense_view,
+            category
         )
         self._current_view.pack()

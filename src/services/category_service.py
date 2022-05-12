@@ -67,6 +67,11 @@ class CategoryService:
         for category in categories:
             categories_text.append(category['name'])
         return categories_text
+    
+    def get_category_by_name(self, category):
+        self._user = user_service.get_current_user()
+        category = self._category_repository.find_by_name_and_owner(category,self._user)
+        return category
 
     def remove_category_from_user(self, category_name):
         self._user = user_service.get_current_user()

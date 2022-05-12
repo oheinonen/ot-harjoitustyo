@@ -201,16 +201,28 @@ class CategoryListView:
         """
         self._listBox.insert(0,category_service.stringify_category(category))
 
-    def _initialize_remove_button(self):
-        remove_button_frame = ttk.Frame(master=self._frame)
+    def _initialize_buttons(self):
+        category_buttons_frame = ttk.Frame(master=self._frame)
+        see_category_button = ttk.Button(
+            category_buttons_frame,
+            text='View',
+            command= lambda: self._mainView._handle_show_category_view(
+                category_service.get_category_by_name(
+                    self._listBox.get(ANCHOR),
+                )
+            )
+        )
+        see_category_button.grid(
+            row=0, column=3, sticky=constants.NW, padx=5, pady=5)   
+
         remove_category_button = ttk.Button(
-            master=remove_button_frame,
+            master=category_buttons_frame,
             text="remove",
             command=lambda: self._mainView._remove_category_handler(self._listBox.get(ANCHOR))
             )
         remove_category_button.grid(
             row=0, column=4, sticky=constants.NW, padx=5, pady=5)   
-        remove_button_frame.pack()
+        category_buttons_frame.pack()
 
     def _initialize_category_amount_label(self):
         nof_categories = len(self._categories)
@@ -255,7 +267,7 @@ class CategoryListView:
             for category in reversed(self._categories[-10:]):
                 self._initialize_category_item(category)
             self._listBox.pack(fill=constants.X)
-            self._initialize_remove_button()
+            self._initialize_buttons()
             self._initialize_category_amount_label()
 
 
@@ -264,7 +276,7 @@ class MainView:
     """View responsible for showing existing expenses and categories and creating new ones
     """
 
-    def __init__(self, root, handle_logout, handle_show_expense_view):
+    def __init__(self, root, handle_logout, handle_show_expense_view, handle_show_category_view):
         """Constructor for the class. Creates new main view
 
         Args:
@@ -284,6 +296,7 @@ class MainView:
         self._expense_list_frame = None
         self._handle_logout = handle_logout
         self._handle_show_expense_view = handle_show_expense_view
+        self._handle_show_category_view = handle_show_category_view
 
         self._initialize()
 
