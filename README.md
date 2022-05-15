@@ -1,7 +1,7 @@
 # Budgeting application 
 This repository contains budgeting application made for Univerity of Helsinki course [Ohjelmistotekniikka](https://courses.helsinki.fi/fi/tkt20002)
 
-Purpose of this application is that the users can keep track on their expenses . The application can have multiple users, each having their own expenses.
+Purpose of this application is that the users can keep track on their expenses. The application can have multiple users, each having their own expenses.
 
 
 ## Documentation 
@@ -16,6 +16,7 @@ Purpose of this application is that the users can keep track on their expenses .
 ## Releases
 - [Week 5 pre-release](https://github.com/oheinonen/ot-harjoitustyo/releases/tag/week5)
 - [Week 6 pre-release](https://github.com/oheinonen/ot-harjoitustyo/releases/tag/week6)
+- [Final release](https://github.com/oheinonen/ot-harjoitustyo/releases/tag/final_release)
 
 ## Setup
 
