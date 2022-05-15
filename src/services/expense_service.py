@@ -73,6 +73,14 @@ class ExpenseService:
         return expense
 
     def get_expenses_by_category(self, category):
+        """Finds all expenses of logged in user that belong to given category
+
+        Args:
+            category (String): name of the category 
+
+        Returns:
+            Expenses: list of Expense objects that belong to given category by logged in user
+        """
         self._user = self._user_service.get_current_user()
 
         expenses = self._expense_repository.find_all_by_category_and_owner(

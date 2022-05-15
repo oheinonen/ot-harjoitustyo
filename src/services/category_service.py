@@ -33,7 +33,7 @@ class CategoryService:
         self._user = None
 
     def create_category_for_user(self, category):
-        """Creates new cateory for the user that is logged in
+        """Creates new category for the user that is logged in
 
         Args:
             category (String): name of the category given by the user
@@ -76,12 +76,28 @@ class CategoryService:
         return categories_text
 
     def get_category_by_name(self, category):
+        """ Finds Category object using given name and current user
+
+        Args:
+            category (String): name of the category that is wanted to be found
+
+        Returns:
+            Category: Category object that corresponds to given name and user that is logged in
+        """
         self._user = self._user_service.get_current_user()
         category = self._category_repository.find_by_name_and_owner(
             category, self._user.username)
         return category
 
     def remove_category_from_user(self, category_name):
+        """Removes category by given category name and user that is logged in
+
+        Args:
+            category_name (String): name of ategory to be removed
+
+        Returns:
+            Boolean: True if removal succeeded, false otherwise
+        """
         self._user = self._user_service.get_current_user()
         category = self._category_repository.find_by_name_and_owner(
             category_name, self._user.username)

@@ -69,6 +69,14 @@ class ExpenseRepository:
         return expense
 
     def remove(self, expense_id):
+        """Removes the expense corresponding given id 
+
+        Args:
+            expense_id (Int): primary key of expense that will be removed
+
+        Returns:
+            Boolean: true when no error arises
+        """
         cursor = self._connection.cursor()
         cursor.execute(
             'delete from expenses where expense_id = ?',
@@ -84,6 +92,14 @@ class ExpenseRepository:
         return list(map(get_expense_by_row, rows))
 
     def find_all_by_owner(self, owner):
+        """Helps to find all expenses of single user
+
+        Args:
+            owner (String): username of user whose expenses are found
+
+        Returns:
+            list of expenses user owns
+        """
         cursor = self._connection.cursor()
         cursor.execute(
             'select * from expenses where owner = ?',
@@ -93,6 +109,16 @@ class ExpenseRepository:
         return list(map(get_expense_by_row, rows))
 
     def find_all_by_category_and_owner(self, category, owner):
+        """Helps to find specified expenses by category and owner
+
+        Args:
+            category (String): text corresponding to category name
+            owner (String): text corresponding to expense owner
+
+        Returns:
+            Expense: Expense object corresponding to the given input
+        """
+
         cursor = self._connection.cursor()
         cursor.execute(
             'select * from expenses where category = ? and owner = ?',

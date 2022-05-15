@@ -46,7 +46,7 @@ class CategoryRepository:
             category (Category): Category to be deleted
 
         Returns:
-            Boolean: currently always true
+            Boolean: true when no error arises
         """
         cursor = self._connection.cursor()
         cursor.execute(
@@ -115,6 +115,14 @@ class CategoryRepository:
         return list(map(get_category_by_row, rows))
 
     def find_all_by_owner(self, owner):
+        """Helps to find all categories of single user
+
+        Args:
+            owner (String): username of user whose categories are found
+
+        Returns:
+            list of categories user owns
+        """
         cursor = self._connection.cursor()
         cursor.execute(
             'select * from categories where owner = ?',
