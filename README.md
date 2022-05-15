@@ -10,6 +10,7 @@ Purpose of this application is that the users can keep track on their expenses .
 - [Requirements specification](https://github.com/oheinonen/ot-harjoitustyo/blob/master/documentation/requirement_specification.md)
 - [Changelog](https://github.com/oheinonen/ot-harjoitustyo/blob/master/documentation/changelog.md)
 - [Instructions for use](https://github.com/oheinonen/ot-harjoitustyo/blob/master/documentation/instructions.md)
+- [Testing](https://github.com/oheinonen/ot-harjoitustyo/blob/master/documentation/testing.md)
 
 
 ## Releases
