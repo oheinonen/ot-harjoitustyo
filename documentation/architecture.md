@@ -46,9 +46,49 @@ Database operations are included in the _repositories_ directory, where is UserR
 
 ## Main functionalities
 
+### User login
+
+In the login view, after the user has given username and password as input and pressed _Login_, following sequence happens:
+
+```mermaid
+
+sequenceDiagram
+    actor User
+    User ->> UI: click "Login" button
+    UI ->> UserService: login("Matti", "12345")
+    participant UserRepository
+    UserService ->> UserRepository: find_by_username("Matti")
+    UserRepository -->> UserService: user
+    UserService -->> UI: user
+    UI ->> UI: show_main_view()
+```
+Pressing the button calls UserService method login with parameters given in the input fields (username and password). UserService uses UserRepository to find out whether username exists or not and if password matches. If they match, user interface changes view to MainView.
+
+### Creating new account
+In the create account view, after the user has given username and password as input and pressed _Create!_, following sequence happens:
+
+```mermaid
+
+sequenceDiagram
+    actor User
+    User ->> UI: click "Create!" button
+    UI ->> UserService: create_user("Minna", "12345")
+    participant UserRepository
+    UserService ->> UserRepository: find_by_username("Minna")
+    UserRepository -->> UserService: None
+    UserService ->> Minna: User("Minna", "12345")
+    UserService ->> UserRepository: create_user("Minna","12345")
+    UserRepository -->> UserService: user
+    UserService -->> UI: user
+    UI ->> UI: show_main_view()
+```
+
+Pressing the button calls UserService method create_user with parameters given in the input fields (username and password). UserService uses UserRepository to find out whether username is already in use. If username is free, application creates new user and calls UserRepository method create to save account to database. After that, user interface changes view to MainView
+
+
 ### Creating new expense 
 
-In the main view, user can fill in name and value of new expense, and select category from existing categories. When user clicks "Add new expense" -button, following sequence occurs:
+In the main view, the user can fill in name and value of new expense, and select category from existing categories. When user clicks "Add new expense" -button, following sequence occurs:
 
 ```mermaid
 
@@ -64,3 +104,6 @@ sequenceDiagram
     UI ->> UI: initialize_expense_list()
 ```
 UI-class calls create_expense function with parameters that user has given as input. Application creates new Expense object (it also adds user as owner and date to be now) and saves it to database with ExpenseRepository object. Then UI refreshes the view so that it includes the new Expense object
+
+### Other functionalities
+Same principles apply for other functionalities as well. Whenever user creates somtehing new, updates information or removes information, user interface calls method in either UserService, ExpenseService or CategoryService, and then that method calls other method in either UserRepository, ExpenseRepository or CategoryRepository. When everything is done, user interface is updated so that it always shows up-to-date information.
