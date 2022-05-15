@@ -14,11 +14,9 @@ There are only one type of users, normal users.
   - [x] If the username doesn't exist or the password isn't correct, the application shows an error
 ### After signing in
 - [x] The user can see own expenses 
-  - Later the expenses can be listed eg. via category 
-    - and maybe with a graph?
+  - [x] The expenses can be listed by category 
 - [x] The user can add new expense 
-  - [x] Expense includes at least name, category, date and amount 
-  - Later recurring expenses could be added
+  - [x] Expense includes name, category, date and amount 
 - [x] The user can add new cost category 
 - [x] The user can update expense 
 - [x] The user can remove expense 
