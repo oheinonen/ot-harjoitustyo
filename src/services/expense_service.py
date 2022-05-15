@@ -76,7 +76,7 @@ class ExpenseService:
         """Finds all expenses of logged in user that belong to given category
 
         Args:
-            category (String): name of the category 
+            category (String): name of the category
 
         Returns:
             Expenses: list of Expense objects that belong to given category by logged in user

@@ -69,7 +69,7 @@ class ExpenseRepository:
         return expense
 
     def remove(self, expense_id):
-        """Removes the expense corresponding given id 
+        """Removes the expense corresponding given id
 
         Args:
             expense_id (Int): primary key of expense that will be removed
