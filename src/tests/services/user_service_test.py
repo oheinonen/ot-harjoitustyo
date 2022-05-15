@@ -17,7 +17,6 @@ class FakeUserRepository:
         self.users.append(user)
         return user
 
-
     def find_all(self):
         return self.users
 
@@ -35,42 +34,50 @@ class TestUserService(unittest.TestCase):
 
         self.testUser1 = User('Matti', '12345')
         self.testUser2 = User('Mi', '54321')
-        
 
     def test_create_user(self):
-        self.user_service.create_user(self.testUser1.username, self.testUser1.password)
+        self.user_service.create_user(
+            self.testUser1.username, self.testUser1.password)
 
         self.assertEqual(len(self.user_service._user_repository.users), 1)
 
-        self.user_service.create_user(self.testUser2.username, self.testUser2.password)
+        self.user_service.create_user(
+            self.testUser2.username, self.testUser2.password)
 
         self.assertEqual(len(self.user_service._user_repository.users), 1)
-    
-        self.user_service.create_user(self.testUser1.username, self.testUser1.password)
+
+        self.user_service.create_user(
+            self.testUser1.username, self.testUser1.password)
 
         self.assertEqual(len(self.user_service._user_repository.users), 1)
 
     def test_logout(self):
-        self.user_service.create_user(self.testUser1.username, self.testUser1.password)
+        self.user_service.create_user(
+            self.testUser1.username, self.testUser1.password)
         self.user_service.logout()
         self.assertEqual(self.user_service._user, None)
 
-
     def test_login(self):
-        self.user_service.create_user(self.testUser1.username, self.testUser1.password)
+        self.user_service.create_user(
+            self.testUser1.username, self.testUser1.password)
         self.user_service.logout()
-        self.user_service.login(self.testUser1.username, self.testUser1.password)
+        self.user_service.login(self.testUser1.username,
+                                self.testUser1.password)
 
-        self.assertEqual(self.user_service._user.username, self.testUser1.username)
-        self.assertEqual(self.user_service._user.password, self.testUser1.password)
-        
+        self.assertEqual(self.user_service._user.username,
+                         self.testUser1.username)
+        self.assertEqual(self.user_service._user.password,
+                         self.testUser1.password)
+
         self.user_service.logout()
 
-        self.user_service.login(self.testUser2.username, self.testUser2.password)
+        self.user_service.login(self.testUser2.username,
+                                self.testUser2.password)
 
         self.assertEqual(self.user_service._user, None)
 
     def test_delete_all(self):
-        self.user_service.create_user(self.testUser1.username, self.testUser1.password)
+        self.user_service.create_user(
+            self.testUser1.username, self.testUser1.password)
         self.user_service.delete_all()
-        self.assertEqual(len(self.user_service._user_repository.users),0)
+        self.assertEqual(len(self.user_service._user_repository.users), 0)

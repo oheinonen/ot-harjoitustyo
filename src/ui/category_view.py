@@ -43,14 +43,14 @@ class CategoryView:
     def _initialize_expense_list(self):
         if self._expense_list_view:
             self._expense_list_view.destroy()
-        expenses = expense_service.get_expenses_by_category(self._category.name)
+        expenses = expense_service.get_expenses_by_category(
+            self._category.name)
         self._expense_list_view = ExpenseListView(
             self,
             self._expense_list_frame,
             expenses
         )
         self._expense_list_view.pack()
-
 
     def _initialize(self):
         self._frame = ttk.Frame(master=self._root)
@@ -64,7 +64,6 @@ class CategoryView:
             sticky=constants.NW
         )
 
-
     def _update_expense_handler(self, expense_id):
         """Response for action after user clicks 'Update' button 
 
@@ -73,7 +72,6 @@ class CategoryView:
         """
         expense = expense_service.get_expense_by_id(expense_id)
         self._handle_show_expense_view(expense)
-
 
     def _remove_expense_handler(self, expense_id):
         """Response for action after user clicks 'remove' button next to one of the expenses 

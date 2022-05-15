@@ -24,9 +24,10 @@ class FakeUserRepository:
     def find_by_username(self, username):
         user = filter(lambda user: user.username == username, self.users)
         return list(user)
-    
+
     def delete_all(self):
         self.users = []
+
 
 class FakeExpenseRepository:
 
@@ -35,7 +36,7 @@ class FakeExpenseRepository:
 
     def create(self, expense):
         self.expenses.append(expense)
-        
+
         return expense
 
     def remove(self, expense_id):
@@ -52,40 +53,43 @@ class FakeExpenseRepository:
             new_category,
             expense.date,
             expense.owner
-            ) 
+        )
         return self.expenses[index]
 
     def find_all_by_owner(self, owner):
-        expenses = list(filter(lambda expense: expense.owner == owner, self.expenses))
+        expenses = list(
+            filter(lambda expense: expense.owner == owner, self.expenses))
         return expenses
 
     def find_all_by_category_and_owner(self, category, owner):
 
         expenses = list(filter(lambda expense:
-            expense.owner == owner and expense.category == category, 
-            self.expenses
-            ))
+                               expense.owner == owner and expense.category == category,
+                               self.expenses
+                               ))
         return expenses
 
     def find_by_id(self, expense_id):
         expense = list(filter(lambda expense: expense.expense_id == expense_id,
-                         self.expenses
-                         ))[0]
+                              self.expenses
+                              ))[0]
         return expense
 
     def find_all(self):
         return self.expenses
-    
+
     def next_id(self):
         return len(self.expenses)
 
     def delete_all(self):
         self.expenses = []
 
+
 class TestExpenseService(unittest.TestCase):
     def setUp(self):
         self.user_service = UserService(FakeUserRepository())
-        self.expense_service = ExpenseService(FakeExpenseRepository(),self.user_service)
+        self.expense_service = ExpenseService(
+            FakeExpenseRepository(), self.user_service)
 
         self.testUser1 = User('Matti', '12345')
         self.testUser2 = User('Minna', '54321')
@@ -95,7 +99,6 @@ class TestExpenseService(unittest.TestCase):
             1, 'Hamburger', '10', 'Food', datetime.datetime.now().strftime('%d/%m/%Y'), 'Minna')
         self.testExpense3 = Expense(
             0, 'Pizza', '10', 'Food', datetime.datetime.now().strftime('%d/%m/%Y'), 'Matti')
-
 
     def login(self, user):
         self.user_service.create_user(user.username, user.password)
@@ -126,7 +129,7 @@ class TestExpenseService(unittest.TestCase):
             self.testExpense2.value,
             self.testExpense2.category
         )
-        
+
         updated_expense = self.expense_service.update_expense(
             expense,
             updated_name,
@@ -151,9 +154,8 @@ class TestExpenseService(unittest.TestCase):
 
         self.expense_service.remove_expense(expense.expense_id)
         expenses = self.expense_service.find_all_expenses(self.testUser2)
-    
-        self.assertEqual(len(expenses), 0)
 
+        self.assertEqual(len(expenses), 0)
 
     def test_get_expense_by_id(self):
         self.login(self.testUser1)
@@ -163,7 +165,8 @@ class TestExpenseService(unittest.TestCase):
             self.testExpense1.value,
             self.testExpense1.category
         )
-        expense = self.expense_service.get_expense_by_id(self.testExpense1.expense_id)
+        expense = self.expense_service.get_expense_by_id(
+            self.testExpense1.expense_id)
 
         self.assertEqual(expense.name, self.testExpense1.name)
         self.assertEqual(expense.value, self.testExpense1.value)
@@ -186,14 +189,13 @@ class TestExpenseService(unittest.TestCase):
             self.testExpense3.category
         )
 
-        expenses = self.expense_service.get_expenses_by_category(self.testExpense1.category)
+        expenses = self.expense_service.get_expenses_by_category(
+            self.testExpense1.category)
         expense1 = expenses[0]
 
-        self.assertEqual(len(expenses),1)
+        self.assertEqual(len(expenses), 1)
         self.assertEqual(expense1.name, self.testExpense1.name)
         self.assertEqual(expense1.value, self.testExpense1.value)
         self.assertEqual(expense1.category, self.testExpense1.category)
         self.assertEqual(expense1.date, self.testExpense1.date)
         self.assertEqual(expense1.owner, self.testExpense1.owner)
-
-

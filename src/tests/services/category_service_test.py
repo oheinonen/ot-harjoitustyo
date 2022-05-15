@@ -22,9 +22,10 @@ class FakeUserRepository:
     def find_by_username(self, username):
         user = filter(lambda user: user.username == username, self.users)
         return list(user)
-    
+
     def delete_all(self):
         self.users = []
+
 
 class FakeCategoryRepository:
 
@@ -44,34 +45,37 @@ class FakeCategoryRepository:
 
     def find_by_id(self, category_id):
         category = list(filter(lambda category: category.category_id == category_id,
-                         self.categories
-                         ))
+                               self.categories
+                               ))
         return category[0] if len(category) else None
 
     def find_by_name_and_owner(self, name, owner):
         categories = list(filter(lambda category:
-            category.owner == owner and category.name == name, 
-            self.categories
-            ))
+                                 category.owner == owner and category.name == name,
+                                 self.categories
+                                 ))
         return categories
-    
+
     def find_all_by_owner(self, owner):
-        categories = list(filter(lambda category: category.owner == owner, self.categories))
+        categories = list(
+            filter(lambda category: category.owner == owner, self.categories))
         return categories
 
     def find_all(self):
         return self.categories
-    
+
     def next_id(self):
         return len(self.categories)
 
     def delete_all(self):
         self.categories = []
 
+
 class TestCategoryService(unittest.TestCase):
     def setUp(self):
         self.user_service = UserService(FakeUserRepository())
-        self.category_service = CategoryService(FakeCategoryRepository(), self.user_service)
+        self.category_service = CategoryService(
+            FakeCategoryRepository(), self.user_service)
 
         self.testUser1 = User('Matti', '12345')
         self.testUser2 = User('Minna', '54321')
@@ -86,54 +90,53 @@ class TestCategoryService(unittest.TestCase):
         self.login(self.testUser1)
 
         category = self.category_service.create_category_for_user(
-            self.testCategory1.name        
+            self.testCategory1.name
         )
-        self.assertEqual(len(self.category_service._category_repository.categories),1)
+        self.assertEqual(
+            len(self.category_service._category_repository.categories), 1)
         self.assertEqual(category.name, self.testCategory1.name)
         self.assertEqual(category.owner, self.testCategory1.owner)
 
         category = self.category_service.create_category_for_user(
-            self.testCategory1.name        
+            self.testCategory1.name
         )
-        self.assertEqual(len(self.category_service._category_repository.categories),1)
-
-
-
+        self.assertEqual(
+            len(self.category_service._category_repository.categories), 1)
 
     def test_find_all_categories_for_user(self):
         self.login(self.testUser1)
 
         category = self.category_service.create_category_for_user(
-            self.testCategory1.name        
+            self.testCategory1.name
         )
 
         category = self.category_service.find_all_categories_for_user()[0]
 
-        self.assertEqual(len(self.category_service._category_repository.categories),1)
+        self.assertEqual(
+            len(self.category_service._category_repository.categories), 1)
         self.assertEqual(category.name, self.testCategory1.name)
         self.assertEqual(category.owner, self.testCategory1.owner)
-
 
     def test_find_all_categories_for_user_text(self):
         self.login(self.testUser1)
 
         self.category_service.create_category_for_user(
-            self.testCategory1.name        
+            self.testCategory1.name
         )
 
-        category_1 = self.category_service.find_all_categories_for_user_text()[1]
+        category_1 = self.category_service.find_all_categories_for_user_text()[
+            1]
 
         self.assertEqual(category_1, self.testCategory1.name)
 
-
-    
     def test_get_category_by_name(self):
         self.login(self.testUser1)
 
         self.category_service.create_category_for_user(
-            self.testCategory1.name        
+            self.testCategory1.name
         )
-        category = self.category_service.get_category_by_name(self.testCategory1.name)[0]
+        category = self.category_service.get_category_by_name(
+            self.testCategory1.name)[0]
         self.assertEqual(category.name, self.testCategory1.name)
         self.assertEqual(category.owner, self.testCategory1.owner)
 
@@ -141,7 +144,8 @@ class TestCategoryService(unittest.TestCase):
         self.login(self.testUser1)
 
         category = self.category_service.create_category_for_user(
-            self.testCategory1.name        
+            self.testCategory1.name
         )
         self.category_service.remove_category_from_user(category.name)
-        self.assertEqual(len(self.category_service._category_repository.categories),1)
+        self.assertEqual(
+            len(self.category_service._category_repository.categories), 1)

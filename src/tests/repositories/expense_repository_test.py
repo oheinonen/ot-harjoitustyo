@@ -35,7 +35,8 @@ class TestExpenseRepository(unittest.TestCase):
     def test_find_all_by_owner(self):
         expense_repository.create(self.testExpense1)
         expense_repository.create(self.testExpense2)
-        expenses = expense_repository.find_all_by_owner(self.testExpense1.owner)
+        expenses = expense_repository.find_all_by_owner(
+            self.testExpense1.owner)
 
         self.assertEqual(len(expenses), 1)
         self.assertEqual(expenses[0].name, self.testExpense1.name)
@@ -54,7 +55,7 @@ class TestExpenseRepository(unittest.TestCase):
             updated_name,
             updated_value,
             updated_category
-            )
+        )
         expenses = expense_repository.find_all()
         updated_expense = expenses[0]
 
@@ -76,7 +77,8 @@ class TestExpenseRepository(unittest.TestCase):
     def test_find_all_by_category_and_owner(self):
         expense_repository.create(self.testExpense1)
         expense_repository.create(self.testExpense3)
-        expenses = expense_repository.find_all_by_category_and_owner(self.testExpense3.category, self.testExpense1.owner)
+        expenses = expense_repository.find_all_by_category_and_owner(
+            self.testExpense3.category, self.testExpense1.owner)
 
         self.assertEqual(len(expenses), 1)
         self.assertEqual(expenses[0].name, self.testExpense3.name)
@@ -98,13 +100,12 @@ class TestExpenseRepository(unittest.TestCase):
     def test_next_id(self):
         next_id = expense_repository.next_id()
         self.assertEqual(next_id, None)
-        
+
         expense_repository.create(self.testExpense1)
         expense_repository.create(self.testExpense2)
         expense_repository.create(self.testExpense3)
         next_id = expense_repository.next_id()
         self.assertEqual(next_id, 3)
-
 
     def test_delete_all(self):
         expense_repository.create(self.testExpense1)
@@ -116,4 +117,3 @@ class TestExpenseRepository(unittest.TestCase):
         expense_repository.delete_all()
         expenses = expense_repository.find_all()
         self.assertEqual(len(expenses), 0)
-

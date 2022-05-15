@@ -67,16 +67,17 @@ class ExpenseService:
         expense = self._expense_repository.update(
             expense, name, value, category)
         return expense
-    
+
     def get_expense_by_id(self, expense_id):
         expense = self._expense_repository.find_by_id(expense_id)
         return expense
-    
+
     def get_expenses_by_category(self, category):
         self._user = self._user_service.get_current_user()
 
-        expenses = self._expense_repository.find_all_by_category_and_owner(category, self._user.username)
-        return expenses 
+        expenses = self._expense_repository.find_all_by_category_and_owner(
+            category, self._user.username)
+        return expenses
 
     def remove_expense(self, expense_id):
         return self._expense_repository.remove(expense_id)

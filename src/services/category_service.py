@@ -68,20 +68,23 @@ class CategoryService:
             Category: list of Categories of logged in user
         """
         self._user = self._user_service.get_current_user()
-        categories = self._category_repository.find_all_by_owner(self._user.username)
+        categories = self._category_repository.find_all_by_owner(
+            self._user.username)
         categories_text = ['Other']
         for category in categories:
             categories_text.append(category.name)
         return categories_text
-    
+
     def get_category_by_name(self, category):
         self._user = self._user_service.get_current_user()
-        category = self._category_repository.find_by_name_and_owner(category,self._user.username)
+        category = self._category_repository.find_by_name_and_owner(
+            category, self._user.username)
         return category
 
     def remove_category_from_user(self, category_name):
         self._user = self._user_service.get_current_user()
-        category = self._category_repository.find_by_name_and_owner(category_name,self._user.username)
+        category = self._category_repository.find_by_name_and_owner(
+            category_name, self._user.username)
         return self._category_repository.remove(category)
 
     def stringify_category(self, category):

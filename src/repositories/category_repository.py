@@ -113,7 +113,7 @@ class CategoryRepository:
         rows = cursor.fetchall()
 
         return list(map(get_category_by_row, rows))
-    
+
     def find_all_by_owner(self, owner):
         cursor = self._connection.cursor()
         cursor.execute(

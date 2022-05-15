@@ -82,7 +82,7 @@ class ExpenseRepository:
         cursor.execute('select * from expenses')
         rows = cursor.fetchall()
         return list(map(get_expense_by_row, rows))
-    
+
     def find_all_by_owner(self, owner):
         cursor = self._connection.cursor()
         cursor.execute(
@@ -91,7 +91,7 @@ class ExpenseRepository:
         )
         rows = cursor.fetchall()
         return list(map(get_expense_by_row, rows))
-    
+
     def find_all_by_category_and_owner(self, category, owner):
         cursor = self._connection.cursor()
         cursor.execute(
@@ -100,8 +100,6 @@ class ExpenseRepository:
         )
         rows = cursor.fetchall()
         return list(map(get_expense_by_row, rows))
-
-    
 
     def find_by_id(self, expense_id):
         """Helps to find specified expense by id

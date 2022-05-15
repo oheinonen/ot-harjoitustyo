@@ -36,20 +36,19 @@ class ExpenseListView:
         """Destroys the view
         """
         self._frame.destroy()
-    
+
     def _initialize_expense_list_header(self):
         header_frame = ttk.Frame(master=self._frame)
         header_label = ttk.Label(master=header_frame,
-            text="Your expenses", font=24)
+                                 text="Your expenses", font=24)
         header_label.grid(
             row=0,
             column=0,
             sticky=constants.NW,
             padx=5,
             pady=5
-            )
+        )
         header_frame.pack()
-
 
     def _initialize_expense_item(self, expense):
         """Initializes view for single Expense object
@@ -57,64 +56,63 @@ class ExpenseListView:
         Args:
             expense (Expense): the Expense object to be shown
         """
-        self._listBox.insert(0,expense_service.stringify_expense(expense))
-    
+        self._listBox.insert(0, expense_service.stringify_expense(expense))
+
     def _initialize_buttons(self):
         expense_buttons_frame = ttk.Frame(master=self._frame)
         update_button = ttk.Button(
             expense_buttons_frame,
             text='Update',
-            command= lambda: self._mainView._update_expense_handler(
+            command=lambda: self._mainView._update_expense_handler(
                 ''.join(
-                        map(
-                            str,
-                            list(
-                                takewhile(
-                                    lambda x:x !=' ',
-                                    self._listBox.get(ANCHOR)[1:]
-                                )
+                    map(
+                        str,
+                        list(
+                            takewhile(
+                                lambda x: x != ' ',
+                                self._listBox.get(ANCHOR)[1:]
                             )
                         )
                     )
                 )
+            )
         )
-        update_button.grid(row=0,column=0,padx=5,pady=5)
+        update_button.grid(row=0, column=0, padx=5, pady=5)
 
         delete_button = ttk.Button(
             expense_buttons_frame,
             text='Delete',
             command=lambda: self._mainView._remove_expense_handler(
                 ''.join(
-                        map(
-                            str,
-                            list(
-                                takewhile(
-                                    lambda x:x !=' ',
-                                    self._listBox.get(ANCHOR)[1:]
-                                )
+                    map(
+                        str,
+                        list(
+                            takewhile(
+                                lambda x: x != ' ',
+                                self._listBox.get(ANCHOR)[1:]
                             )
                         )
                     )
                 )
+            )
         )
-        delete_button.grid(row=0,column=1,padx=5,pady=5)
+        delete_button.grid(row=0, column=1, padx=5, pady=5)
 
         expense_buttons_frame.pack()
 
-    
     def _initialize(self):
         """Initializes the frame for expense list. 
             If there is not added expenses yet, shows text that tells user about it.
         """
-        self._frame = ttk.Frame(master=self._root)        
+        self._frame = ttk.Frame(master=self._root)
         self._initialize_expense_list_header()
         nof_expenses = len(self._expenses)
 
         if not self._expenses:
 
-            no_expenses_frame = ttk.Frame (master=self._frame)
+            no_expenses_frame = ttk.Frame(master=self._frame)
             no_expenses_label = ttk.Label(
-                master=no_expenses_frame, 
+                master=no_expenses_frame,
                 text='No expenses added yet.')
             no_expenses_label.grid(
                 row=0,
@@ -135,7 +133,7 @@ class ExpenseListView:
             # Shows how many expenses user has added
             expense_amount_frame = ttk.Frame(master=self._frame)
             expense_amount_label = ttk.Label(
-                master=expense_amount_frame, 
+                master=expense_amount_frame,
                 text='You have added ' + str(nof_expenses) + ' expenses')
             expense_amount_label.grid(
                 row=0,
@@ -145,7 +143,6 @@ class ExpenseListView:
                 pady=5
             )
             expense_amount_frame.pack(fill=constants.X)
-
 
 
 class CategoryListView:
@@ -182,16 +179,15 @@ class CategoryListView:
     def _initialize_category_list_header(self):
         header_frame = ttk.Frame(master=self._frame)
         header_label = ttk.Label(master=header_frame,
-            text="Your categories", font=24)
+                                 text="Your categories", font=24)
         header_label.grid(
             row=0,
             column=3,
             sticky=constants.NW,
             padx=5,
             pady=5
-            )
+        )
         header_frame.pack()
-
 
     def _initialize_category_item(self, category):
         """Initializes single Category object
@@ -199,34 +195,35 @@ class CategoryListView:
         Args:
             category (Category): Category object to be shown
         """
-        self._listBox.insert(0,category_service.stringify_category(category))
+        self._listBox.insert(0, category_service.stringify_category(category))
 
     def _initialize_buttons(self):
         category_buttons_frame = ttk.Frame(master=self._frame)
         see_category_button = ttk.Button(
             category_buttons_frame,
             text='View',
-            command= lambda: self._mainView._handle_show_category_view(
-                    self._listBox.get(ANCHOR),
+            command=lambda: self._mainView._handle_show_category_view(
+                self._listBox.get(ANCHOR),
             )
         )
         see_category_button.grid(
-            row=0, column=3, sticky=constants.NW, padx=5, pady=5)   
+            row=0, column=3, sticky=constants.NW, padx=5, pady=5)
 
         remove_category_button = ttk.Button(
             master=category_buttons_frame,
             text="remove",
-            command=lambda: self._mainView._remove_category_handler(self._listBox.get(ANCHOR))
-            )
+            command=lambda: self._mainView._remove_category_handler(
+                self._listBox.get(ANCHOR))
+        )
         remove_category_button.grid(
-            row=0, column=4, sticky=constants.NW, padx=5, pady=5)   
+            row=0, column=4, sticky=constants.NW, padx=5, pady=5)
         category_buttons_frame.pack()
 
     def _initialize_category_amount_label(self):
         nof_categories = len(self._categories)
         category_amount_frame = ttk.Frame(master=self._frame)
         category_amount_label = ttk.Label(
-            master=category_amount_frame, 
+            master=category_amount_frame,
             text='You have added ' + str(nof_categories) + ' categories'
         )
         category_amount_label.grid(
@@ -238,17 +235,16 @@ class CategoryListView:
         )
         category_amount_frame.pack(fill=constants.X)
 
-
     def _initialize(self):
         """Initializes frame for the category list
         """
-        self._frame = ttk.Frame(master=self._root)        
+        self._frame = ttk.Frame(master=self._root)
         self._initialize_category_list_header()
 
         if not self._categories:
-            no_categories_frame = ttk.Frame (master=self._frame)
+            no_categories_frame = ttk.Frame(master=self._frame)
             no_categories_label = ttk.Label(
-                master=no_categories_frame, 
+                master=no_categories_frame,
                 text='No categories added yet.')
             no_categories_label.grid(
                 row=0,
@@ -260,14 +256,13 @@ class CategoryListView:
             no_categories_frame.pack()
 
         else:
-            self._listBox  = Listbox(master=self._frame)
+            self._listBox = Listbox(master=self._frame)
 
             for category in reversed(self._categories[-10:]):
                 self._initialize_category_item(category)
             self._listBox.pack(fill=constants.X)
             self._initialize_buttons()
             self._initialize_category_amount_label()
-
 
 
 class MainView:
@@ -323,7 +318,8 @@ class MainView:
             text="Logout",
             command=self.logout_handler
         )
-        logout_button.grid(row=0, column=1, padx=5, pady=5, sticky=constants.NW)
+        logout_button.grid(row=0, column=1, padx=5,
+                           pady=5, sticky=constants.NW)
 
     def _initialize_expense_list(self):
         """Creates the expense list view
@@ -382,7 +378,7 @@ class MainView:
 
         # Only existing categories are shown in dropdown menu
         self._category_dropdown = ttk.OptionMenu(new_expense_frame,
-                                                variable,
+                                                 variable,
                                                  categories[0],
                                                  *categories)
         category_label.grid(
@@ -519,7 +515,6 @@ class MainView:
         """
         expense = expense_service.get_expense_by_id(expense_id)
         self._handle_show_expense_view(expense)
-
 
     def _remove_category_handler(self, category):
         """Response for action after user clicks 'remove' button next to one of the categories
