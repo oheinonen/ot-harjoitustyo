@@ -5,6 +5,9 @@ Puprose of this application is that the users can keep track on their expenses a
 ## Users
 There are only one type of users, normal users.
 
+## User interface
+UI has five different views: LoginView, CreateUserView, MainView, ExpenseView and CategoryView. MainView shows everything in one place; all expenses and all categories of logged in user. ExpenseView shows information of one Expense and is tool for user o update its information. CategoryView shows a list of all expenses of a logged in user in a chosen category
+
 ## Functionalities
 ### Before signing in
 - [x] The user can create and account 
@@ -22,3 +25,8 @@ There are only one type of users, normal users.
 - [x] The user can remove expense 
 - [x] The user can remove a cost category 
 - [x] The user can log out 
+
+## Development ideas
+- Show some visualization of expenses
+- Add recurring costs
+- Add incomes
