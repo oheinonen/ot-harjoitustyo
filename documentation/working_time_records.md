@@ -10,4 +10,7 @@
 |20.4.|3.5| Category entity added, user can add own categories and remove them and own expenses|
 |26.4.|5| Added sequence diagram about creating new expense, created own page for expense where they can be updated|
 |3.5.|4| Lot of Docstring documentation, app shows error with bad input, instructions to use created and more information on architecture given|
-| Total   | 28.5  | | 
+|9.5.|4|Added category view|
+|12.5.|1|Fixing category view|
+|15.5.|5|Finishing documentation and tests|
+| Total   | 38.5  | | 
