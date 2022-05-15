@@ -1,7 +1,10 @@
 import datetime
 
 from entities.expense import Expense
-from services.user_service import user_service
+
+from services.user_service import (
+    user_service as default_user_service
+)
 
 from repositories.expense_repository import (
     expense_repository as default_expense_repository
@@ -14,7 +17,8 @@ class ExpenseService:
 
     def __init__(
         self,
-        expense_repository=default_expense_repository
+        expense_repository=default_expense_repository,
+        user_service=default_user_service
     ):
         """Constructor for the class.
         Creates new class for application logic related to Expense objects
@@ -25,6 +29,7 @@ class ExpenseService:
             Defaults to default_expense_repository.
         """
         self._expense_repository = expense_repository
+        self._user_service = user_service
         self._user = None
 
     def create_expense(self, name, value, category):
@@ -42,7 +47,7 @@ class ExpenseService:
         expense_id = self._expense_repository.next_id()
         if not expense_id:
             expense_id = 0
-        user = user_service.get_current_user()
+        user = self._user_service.get_current_user()
         expense = self._expense_repository.create(
             Expense(expense_id, name, value, category, date, user.username))
         return expense
@@ -68,8 +73,9 @@ class ExpenseService:
         return expense
     
     def get_expenses_by_category(self, category):
-        self._user = user_service.get_current_user()
-        expenses = self._expense_repository.find_all_by_category(category, self._user)
+        self._user = self._user_service.get_current_user()
+
+        expenses = self._expense_repository.find_all_by_category_and_owner(category, self._user.username)
         return expenses 
 
     def remove_expense(self, expense_id):
@@ -85,12 +91,12 @@ class ExpenseService:
             String: Expense in readable format
         """
         return '#' + str(
-            expense['expense_id']) + " " + expense['name'] + " " + \
-            str(expense['value']) + " " + expense['category']\
-            + " " + expense['date']
+            expense.expense_id) + " " + expense.name + " " + \
+            str(expense.value) + " " + expense.category\
+            + " " + expense.date
 
     def find_all_expenses(self, owner):
-        return self._expense_repository.find_all(owner)
+        return self._expense_repository.find_all_by_owner(owner)
 
 
 expense_service = ExpenseService()

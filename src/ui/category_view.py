@@ -14,7 +14,7 @@ class CategoryView:
         self._expense_list_frame = None
         self._handle_show_main_view = handle_show_main_view
         self._handle_show_expense_view = handle_show_expense_view
-        self._category = category_service.get_category_by_name(category.name)
+        self._category = category_service.get_category_by_name(category)
 
         self._initialize()
 
@@ -43,7 +43,7 @@ class CategoryView:
     def _initialize_expense_list(self):
         if self._expense_list_view:
             self._expense_list_view.destroy()
-        expenses = expense_service.get_expenses_by_category(self._category)
+        expenses = expense_service.get_expenses_by_category(self._category.name)
         self._expense_list_view = ExpenseListView(
             self,
             self._expense_list_frame,

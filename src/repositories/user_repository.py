@@ -37,6 +37,17 @@ class UserRepository:
         self._connection.commit()
 
         return user
+    
+    def find_all(self):
+        
+        cursor = self._connection.cursor()
+
+        cursor.execute('select * from users')
+
+        rows = cursor.fetchall()
+
+        return list(map(get_user_by_row, rows))
+
 
     def find_by_username(self, username):
         """Helps to find specified expense by username

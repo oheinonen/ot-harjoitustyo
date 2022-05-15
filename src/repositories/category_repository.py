@@ -107,25 +107,22 @@ class CategoryRepository:
             return row[0] + 1
         return None
 
-    def find_all(self, owner):
+    def find_all(self):
+        cursor = self._connection.cursor()
+        cursor.execute('select * from categories')
+        rows = cursor.fetchall()
+
+        return list(map(get_category_by_row, rows))
+    
+    def find_all_by_owner(self, owner):
         cursor = self._connection.cursor()
         cursor.execute(
             'select * from categories where owner = ?',
             (owner,)
         )
-        categories = cursor.fetchall()
-        return categories
-    
-    def find_by_name_and_owner(self, category, owner):
-        cursor = self._connection.cursor()
+        rows = cursor.fetchall()
 
-        cursor.execute(
-            'select * from categories where name = ? and owner = ?',
-            (category, owner.username)
-        )
-        row = cursor.fetchone()
-        return get_category_by_row(row)
-
+        return list(map(get_category_by_row, rows))
 
     def delete_all(self):
         cursor = self._connection.cursor()

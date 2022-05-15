@@ -77,23 +77,29 @@ class ExpenseRepository:
         self._connection.commit()
         return True
 
-    def find_all(self, owner):
+    def find_all(self):
+        cursor = self._connection.cursor()
+        cursor.execute('select * from expenses')
+        rows = cursor.fetchall()
+        return list(map(get_expense_by_row, rows))
+    
+    def find_all_by_owner(self, owner):
         cursor = self._connection.cursor()
         cursor.execute(
             'select * from expenses where owner = ?',
             (owner,)
         )
-        expenses = cursor.fetchall()
-        return expenses
+        rows = cursor.fetchall()
+        return list(map(get_expense_by_row, rows))
     
-    def find_all_by_category(self, category, owner):
+    def find_all_by_category_and_owner(self, category, owner):
         cursor = self._connection.cursor()
         cursor.execute(
             'select * from expenses where category = ? and owner = ?',
-            (category.name, owner.username)
+            (category, owner)
         )
-        expenses = cursor.fetchall()
-        return expenses
+        rows = cursor.fetchall()
+        return list(map(get_expense_by_row, rows))
 
     
 

@@ -207,9 +207,7 @@ class CategoryListView:
             category_buttons_frame,
             text='View',
             command= lambda: self._mainView._handle_show_category_view(
-                category_service.get_category_by_name(
                     self._listBox.get(ANCHOR),
-                )
             )
         )
         see_category_button.grid(
