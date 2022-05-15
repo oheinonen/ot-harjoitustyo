@@ -24,3 +24,9 @@
 
 ## Week 6
 - Application shows errors with bad input
+
+## Week 7
+- Added category view where user can see all expenses belonging to one category
+- Changed lists to use Tkinter Listbox
+- Finishing tests
+- Completing documentation
