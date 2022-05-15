@@ -6,6 +6,7 @@
 poetry install
 ```
 
+
 2. Execute initialization with command
 
 ```bash
@@ -40,10 +41,19 @@ In the main view, user can also add new expense by writing its name and value to
 
 ![Screenshot from 2022-05-03 18-31-51](https://user-images.githubusercontent.com/65664408/166485654-2084c800-73a5-41dc-9898-7b5ed4a32194.png)
 
-## Update existing expense
-Next to expense information, user can also click "update" button. 
-![Screenshot from 2022-05-03 18-32-04](https://user-images.githubusercontent.com/65664408/166485625-5a33f409-8136-4673-9656-16e8c37cbb3e.png)
+## Remove or update existing expense
+User can choose expense in the expense list. Clicking "Delete" deletes selected expense. User can also click "update" button.
+
+![Screenshot from 2022-05-15 21-18-17](https://user-images.githubusercontent.com/65664408/168487860-a5e3558e-72ab-42cf-8ca0-d1d08ce268c3.png)
 
 That shows the expense view, where user can change some of the expense information and save it by clicking "Update!" button.
 
 ![Screenshot from 2022-05-03 18-32-22](https://user-images.githubusercontent.com/65664408/166485516-108cf062-a305-457e-818e-3db4f4e99688.png)
+
+## Show expenses of on category
+User can see all expenses belonging to one category by choosing category from category list and clickin "View"
+
+![Screenshot from 2022-05-15 21-23-15](https://user-images.githubusercontent.com/65664408/168488088-b5137a86-a24b-47b3-9ab0-526a2848123b.png)
+
+That shows the category view, where user can review expenses belonging to that category and update / remove them
+![Screenshot from 2022-05-15 21-23-26](https://user-images.githubusercontent.com/65664408/168488093-ec076af2-63e2-495d-ba34-a3407909e866.png)
